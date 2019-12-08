@@ -1,0 +1,11 @@
+extract -i C:/Users/ETsukerman/Desktop/Working/in/short_video_of_me.mp4 -o C:/Users/ETsukerman/Desktop/Working/out -D cv2-dnn -A cv2-dnn -M none -nm none -min 0 -l 0.4 -een 1 -sz 256 -si 0 -L INFO
+
+D:\faceswap\tools.py sort -i C:/Users/ETsukerman/Desktop/Working/out -s face -t -1.0 -fp rename -g hist -b 5 -be GPU -lf sort_log.json -L INFO
+
+D:\faceswap\tools.py alignments -j remove-faces -a C:/Users/ETsukerman/Desktop/Working/in/short_video_of_me_alignments.fsa -fc C:/Users/ETsukerman/Desktop/Working/out -o console -een 1 -sz 256 -L INFO
+
+D:\faceswap\faceswap.py extract -i C:/Users/ETsukerman/Desktop/Working/in2/trump_short_vid.mp4 -o C:/Users/ETsukerman/Desktop/Working/out2 -D cv2-dnn -A cv2-dnn -M none -nm none -min 0 -l 0.4 -een 1 -sz 256 -si 0 -L INFO
+
+D:\faceswap\faceswap.py train -A C:/Users/ETsukerman/Desktop/Working/out2 -ala C:/Users/ETsukerman/Desktop/Working/in2/trump_short_vid_alignments.fsa -B C:/Users/ETsukerman/Desktop/Working/out -alb C:/Users/ETsukerman/Desktop/Working/in/short_video_of_me_alignments_20191208_112411.fsa -m C:/Users/ETsukerman/Desktop/Working/training_model -t lightweight -bs 64 -it 100 -s 100 -ss 25000 -ps 50 -L INFO
+
+D:\faceswap\faceswap.py convert -i C:/Users/ETsukerman/Desktop/Working/in2/trump_short_vid.mp4 -o C:/Users/ETsukerman/Desktop/Working/prediction -al C:/Users/ETsukerman/Desktop/Working/in2/trump_short_vid_alignments.fsa -m C:/Users/ETsukerman/Desktop/Working/training_model -c avg-color -M predicted -sc none -w ffmpeg -osc 100 -l 0.4 -j 0 -L INFO
